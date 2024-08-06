@@ -1,6 +1,5 @@
-import Particle, { createDefaultParticleSettings, createParticle, drawParticle, IParticle, moveParticleAwayFromPoint, moveParticleToPoint } from "./particle";
+import { createDefaultParticleSettings, createParticle, drawParticle, IParticle, moveParticleAwayFromPoint, moveParticleToPoint } from "./particle";
 import Quadtree from "./quadtree";
-import Rectangle from "./rectangle";
 
 export default class ParticleManager {
   worker = new Worker(new URL("./generate-chunk-particles-worker.ts", import.meta.url));
@@ -23,7 +22,7 @@ export default class ParticleManager {
   constructor(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, initCallback?: () => void) {
     this.canvas = canvas;
     this.context = context;
-    this.particledTree = new Quadtree(new Rectangle(0, 0, canvas.width, canvas.height), 16);
+    this.particledTree = new Quadtree({x: 0, y: 0,width: canvas.width,height : canvas.height}, 16);
 
     this.worker.onmessage = (event) => {
         this.particles.push(...event.data.map(([x, y, lightness]: any[]) => createParticle(x, y, lightness)));

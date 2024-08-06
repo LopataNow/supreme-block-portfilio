@@ -1,4 +1,4 @@
-import Point, { IPoint } from "./point";
+import { IPoint } from "./point";
 
 export interface IRectangle {
     x: number;
@@ -23,26 +23,4 @@ export function intersects(r1: IRectangle, r2: IRectangle): boolean {
         r1.y < r2.y + r2.height &&
         r1.y + r1.height > r2.y
     );
-}
-
-export default class Rectangle {
-    constructor(public x: number, public y: number, public width: number, public height: number) {}
-
-    contains(point: Point): boolean {
-        return (
-            point.x >= this.x &&
-            point.x <= this.x + this.width &&
-            point.y >= this.y &&
-            point.y <= this.y + this.height
-        );
-    }
-
-    intersects(range: Rectangle): boolean {
-        return (
-            this.x < range.x + range.width &&
-            this.x + this.width > range.x &&
-            this.y < range.y + range.height &&
-            this.y + this.height > range.y
-        );
-    }
 }

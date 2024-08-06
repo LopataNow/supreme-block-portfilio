@@ -1,5 +1,5 @@
-import Particle, { IParticle } from "./particle";
-import Rectangle, { contains, intersects, IRectangle } from "./rectangle";
+import { IParticle } from "./particle";
+import { contains, intersects, IRectangle } from "./rectangle";
 
 export default class Quadtree {
     private capacity: number;
@@ -68,13 +68,13 @@ export default class Quadtree {
         const topLeftBounds: IRectangle = { x, y, width: w, height: h };
         this.topLeft = new Quadtree(topLeftBounds, this.capacity);
 
-        const topRightBounds = new Rectangle(x + w, y, w, h);
+        const topRightBounds = { x: x + w, y, width: w, height: h };
         this.topRight = new Quadtree(topRightBounds, this.capacity);
 
-        const bottomLeftBounds = new Rectangle(x, y + h, w, h);
+        const bottomLeftBounds = { x, y: y + h, width: w, height: h };
         this.bottomLeft = new Quadtree(bottomLeftBounds, this.capacity);
 
-        const bottomRightBounds = new Rectangle(x + w, y + h, w, h);
+        const bottomRightBounds = { x: x + w, y: y + h, width: w, height: h };
         this.bottomRight = new Quadtree(bottomRightBounds, this.capacity);
 
         this.divided = true;

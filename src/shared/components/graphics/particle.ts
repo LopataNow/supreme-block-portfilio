@@ -48,7 +48,6 @@ export function moveParticleToPoint(particle: IParticle, moveSpeed: number) {
 }
 
 export function createParticle(positionX: number, positionY: number, lightness: number): IParticle {
-  //const lightness = 22 + PerlinNoise.noise(noiseX * 5, noiseY * 5, 0.8) * 75;
   const colorString = `hsl( 230, 80%,${lightness}%)`;
 
   return {
@@ -57,64 +56,6 @@ export function createParticle(positionX: number, positionY: number, lightness: 
     move: { x: Math.random() * 6, y: Math.random() * 6 },
     position: { x: positionX, y: positionY },
   };
-}
-
-export default class Particle {
-  settings = {
-    radius: 2,
-    moveRadius: 6,
-    moveSpeed: 0.05,
-    color: '',
-  };
-  
-  offset = { x: 0, y: 0 };
-  move = { x: 0, y: 0 };
-  position = { x: 0, y: 0 };
-
-  constructor(positionX: number, positionY: number, lightness: number) {
-    this.position.x = positionX;
-    this.position.y = positionY;
-
-    this.move.x = Math.random() * this.settings.moveRadius;
-    this.move.y = Math.random() * this.settings.moveRadius;
-
-    //const lightness = 22 + PerlinNoise.noise(noiseX * 5, noiseY * 5, 0.8) * 75;
-    this.settings.color = `hsl( 230, 80%,${lightness}%)`;
-  }
-
-  update(mousePosition: { x: number; y: number }) {
-    const dx = mousePosition.x - this.position.x - this.offset.x;
-    const dy = mousePosition.y - this.position.y - this.offset.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    if (dist < 100) {
-      this.offset.x -= (dx * 130) / (dist * dist);
-      this.offset.y -= (dy * 130) / (dist * dist);
-    } else if (dist > 103) {
-      this.offset.x -= this.offset.x * 0.2;
-      this.offset.y -= this.offset.y * 0.2;
-
-      this.move.x += this.settings.moveSpeed;
-      this.move.y += this.settings.moveSpeed;
-    }
-  }
-
-  draw(context: CanvasRenderingContext2D) {
-    context.fillStyle = this.settings.color;
-    context.fillRect(
-      this.position.x + this.offset.x + Math.sin(this.move.x) * this.settings.moveRadius,
-      this.position.y + this.offset.y + Math.sin(this.move.y) * this.settings.moveRadius,
-      this.settings.radius,
-      this.settings.radius
-    );
-
-    /*context.fillRect(
-      this.position.x + this.offset.x,
-      this.position.y + this.offset.y,
-      this.settings.radius,
-      this.settings.radius
-    );*/
-  }
 }
 
 export function generateParticles({

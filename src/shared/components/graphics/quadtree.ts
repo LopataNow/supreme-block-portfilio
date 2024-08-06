@@ -1,10 +1,10 @@
-import Point from "./point";
-import Rectangle from "./rectangle";
+import Particle, { IParticle } from "./particle";
+import Rectangle, { contains, intersects, IRectangle } from "./rectangle";
 
 export default class Quadtree {
     private capacity: number;
-    private points: Point[] = [];
-    private bounds: Rectangle;
+    private particles: IParticle[] = [];
+    private bounds: IRectangle;
     private divided: boolean = false;
 
     private topLeft: Quadtree | undefined = undefined;
@@ -12,18 +12,18 @@ export default class Quadtree {
     private bottomLeft: Quadtree | undefined = undefined;
     private bottomRight: Quadtree | undefined = undefined;
 
-    constructor(bounds: Rectangle, capacity: number) {
+    constructor(bounds: IRectangle, capacity: number) {
         this.capacity = capacity;
         this.bounds = bounds;
     }
 
-    insert(point: Point): boolean {
-        if (!this.bounds.contains(point)) {
+    insert(particle: IParticle): boolean {
+        if (!contains(this.bounds, particle.position)) {
             return false;
         }
 
-        if (this.points.length < this.capacity) {
-            this.points.push(point);
+        if (this.particles.length < this.capacity) {
+            this.particles.push(particle);
             return true;
         }
 
@@ -31,20 +31,32 @@ export default class Quadtree {
             this.subdivide();
         }
 
-        if (this.topLeft?.insert(point)) {
+        if (this.topLeft?.insert(particle)) {
             return true;
         }
-        if (this.topRight?.insert(point)) {
+        if (this.topRight?.insert(particle)) {
             return true;
         }
-        if (this.bottomLeft?.insert(point)) {
+        if (this.bottomLeft?.insert(particle)) {
             return true;
         }
-        if (this.bottomRight?.insert(point)) {
+        if (this.bottomRight?.insert(particle)) {
             return true;
         }
 
         return false;
+    }
+
+    drawBounds(context: CanvasRenderingContext2D): void {
+        context.strokeStyle = "black";
+        context.strokeRect(this.bounds.x, this.bounds.y, this.bounds.width, this.bounds.height);
+
+        if (this.divided) {
+            this.topLeft?.drawBounds(context);
+            this.topRight?.drawBounds(context);
+            this.bottomLeft?.drawBounds(context);
+            this.bottomRight?.drawBounds(context);
+        }
     }
 
     subdivide(): void {
@@ -53,7 +65,7 @@ export default class Quadtree {
         const w = this.bounds.width / 2;
         const h = this.bounds.height / 2;
 
-        const topLeftBounds = new Rectangle(x, y, w, h);
+        const topLeftBounds: IRectangle = { x, y, width: w, height: h };
         this.topLeft = new Quadtree(topLeftBounds, this.capacity);
 
         const topRightBounds = new Rectangle(x + w, y, w, h);
@@ -68,26 +80,26 @@ export default class Quadtree {
         this.divided = true;
     }
 
-    query(range: Rectangle): Point[] {
-        const foundPoints: Point[] = [];
-
-        if (!this.bounds.intersects(range)) {
+    query(range: IRectangle): IParticle[] {
+        const foundPoints: IParticle[] = [];
+    
+        if (!intersects(this.bounds, range)) {
             return foundPoints;
         }
-
-        for (const point of this.points) {
-            if (range.contains(point)) {
-                foundPoints.push(point);
+    
+        for (const particle of this.particles) {
+            if (contains(range, particle.position)) {
+                foundPoints.push(particle);
             }
         }
-
+    
         if (this.divided) {
             foundPoints.push(...this.topLeft?.query(range) ?? []);
             foundPoints.push(...this.topRight?.query(range) ?? []);
             foundPoints.push(...this.bottomLeft?.query(range) ?? []);
             foundPoints.push(...this.bottomRight?.query(range) ?? []);
         }
-
+    
         return foundPoints;
     }
 }

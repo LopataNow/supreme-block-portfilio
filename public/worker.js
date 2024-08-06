@@ -1,6 +1,1 @@
-self.addEventListener('message', (event) => {
-    const message = event.data;
-
-    const response = `Received message: ${message}`;
-    self.postMessage(response);
-});
+self.addEventListener("message",e=>{let s=e.data;self.postMessage(response)});

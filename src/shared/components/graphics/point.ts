@@ -1,3 +1,14 @@
-export default class Point {
+export interface IPoint{
+    x: number;
+    y: number;
+}
+
+export interface IVector extends IPoint {}
+
+export default class Point implements IPoint {
     constructor(public x: number, public y: number) {}
+}
+
+export function calculateDistance(p1: IPoint, p2: IPoint): number {
+    return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
 }

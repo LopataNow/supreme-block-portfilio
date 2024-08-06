@@ -16,9 +16,11 @@ function getMousePos(canvas: HTMLCanvasElement, evt: MouseEvent) {
 
 var particleManager: any;
 var canvas: any;
+var intervalReset: any;
 
 function Canvas(props: any){
   const canvasRef = useRef(null);
+  const [loading, setLoading] = useState(true);
 
   const onMoveHandle = function(e: any){
     if(particleManager){
@@ -33,7 +35,7 @@ function Canvas(props: any){
       canvas.height = window.innerHeight;
       let animationFrameId: number;
 
-      particleManager = new ParticleManager(canvas, context);
+      particleManager = new ParticleManager(canvas, context, () => {setLoading(false)});
 
       const render = () => {
         particleManager.draw(context);
@@ -41,15 +43,20 @@ function Canvas(props: any){
       }
       render()
 
-      /*window.addEventListener("resize", ()=>{
-        const intervalReset = setInterval(() => {
+      window.addEventListener("resize", ()=>{
+        intervalReset = setTimeout(() => {
+          setLoading(true);
+
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
 
           particleManager.init();
-          window.cancelAnimationFrame(animationFrameId)
-        }, 0.1);
-      });*/
+          clearInterval(intervalReset);
+        }, 0.5);
+
+        
+
+      });
 
     return () => {
       particleManager.disable();
@@ -58,13 +65,15 @@ function Canvas(props: any){
   }, [])
 
   return (
+    <>
+    {loading && <div>Loading...</div>}
     <div className='particles'>
       <canvas
           ref={canvasRef} {...props} 
           style={{width: '100%', height: '97vh'}}
-          onMouseMove={onMoveHandle} 
-          onTouchMove={(e)=>{console.log(e)}}/>
+          onMouseMove={onMoveHandle}/>
     </div>
+    </>
   );
 }
 

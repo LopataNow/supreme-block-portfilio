@@ -1,4 +1,63 @@
 import PerlinNoise from "@/common/perlin-noise";
+import { IPoint, IVector } from "./point";
+
+export interface IParticleSettings {
+  radius: number;
+  moveRadius: number;
+  moveSpeed: number;
+}
+
+export interface IParticle{
+  colorString: string;
+  offset: IVector;
+  move: IVector;
+  position: IPoint;
+  isInMOuseRange?: boolean;
+}
+
+export function createDefaultParticleSettings(settrings?: Partial<IParticleSettings>): IParticleSettings {
+  return {
+    radius: 2,
+    moveRadius: 6,
+    moveSpeed: 0.05,
+    ...settrings,
+  };
+}
+
+export function drawParticle(context: CanvasRenderingContext2D, particle: IParticle, settings: IParticleSettings) {
+  context.fillStyle = particle.colorString;
+  context.fillRect(
+    particle.position.x + particle.offset.x + Math.sin(particle.move.x) * settings.moveRadius,
+    particle.position.y + particle.offset.y + Math.sin(particle.move.y) * settings.moveRadius,
+    settings.radius,
+    settings.radius
+  );
+}
+
+export function moveParticleAwayFromPoint(particle: IParticle, dx: number, dy: number, distance: number) {
+    particle.offset.x -= (dx * 130) / (distance ** 2);
+    particle.offset.y -= (dy * 130) / (distance ** 2);
+}
+
+export function moveParticleToPoint(particle: IParticle, moveSpeed: number) {
+    particle.offset.x -= particle.offset.x * 0.2;
+    particle.offset.y -= particle.offset.y * 0.2;
+
+    particle.move.x += moveSpeed;
+    particle.move.y += moveSpeed;
+}
+
+export function createParticle(positionX: number, positionY: number, lightness: number): IParticle {
+  //const lightness = 22 + PerlinNoise.noise(noiseX * 5, noiseY * 5, 0.8) * 75;
+  const colorString = `hsl( 230, 80%,${lightness}%)`;
+
+  return {
+    colorString,
+    offset: { x: 0, y: 0 },
+    move: { x: Math.random() * 6, y: Math.random() * 6 },
+    position: { x: positionX, y: positionY },
+  };
+}
 
 export default class Particle {
   settings = {
@@ -7,18 +66,19 @@ export default class Particle {
     moveSpeed: 0.05,
     color: '',
   };
+  
   offset = { x: 0, y: 0 };
   move = { x: 0, y: 0 };
   position = { x: 0, y: 0 };
 
-  constructor(positionX: number, positionY: number, noiseX: number, noiseY: number) {
+  constructor(positionX: number, positionY: number, lightness: number) {
     this.position.x = positionX;
     this.position.y = positionY;
 
     this.move.x = Math.random() * this.settings.moveRadius;
     this.move.y = Math.random() * this.settings.moveRadius;
 
-    const lightness = 22 + PerlinNoise.noise(noiseX * 5, noiseY * 5, 0.8) * 75;
+    //const lightness = 22 + PerlinNoise.noise(noiseX * 5, noiseY * 5, 0.8) * 75;
     this.settings.color = `hsl( 230, 80%,${lightness}%)`;
   }
 
@@ -47,6 +107,13 @@ export default class Particle {
       this.settings.radius,
       this.settings.radius
     );
+
+    /*context.fillRect(
+      this.position.x + this.offset.x,
+      this.position.y + this.offset.y,
+      this.settings.radius,
+      this.settings.radius
+    );*/
   }
 }
 
@@ -75,7 +142,8 @@ export function generateParticles({
         for (let y = startY-4; y < height - padding; y += spaces) {
             const noise = PerlinNoise.noise((randomX + x / width) * 20, (randomY + y / height) * 20, 0.8);
             if (noise < 0.36) {
-                particles.push([x, y, randomX + x / width, randomY + y / height]);
+                const lightness = 22 + PerlinNoise.noise((randomX + x / width) * 5, (randomY + y / height) * 5, 0.8) * 75;
+                particles.push([x, y, lightness]);
             }
         }
     }

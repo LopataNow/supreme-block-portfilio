@@ -4,7 +4,8 @@ import React, { useRef, useEffect, useState }  from 'react';
 import ParticleManager from './particle-manager';
 
 function getMousePos(canvas: HTMLCanvasElement, evt: MouseEvent) {
-  const rect = canvas.getBoundingClientRect();
+  if(!canvas) return {x: evt.clientX, y: evt.clientY};
+  const rect = canvas?.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
   const scaleY = canvas.height / rect.height;
 
@@ -14,12 +15,13 @@ function getMousePos(canvas: HTMLCanvasElement, evt: MouseEvent) {
   };
 }
 
-var particleManager: any;
+var particleManager: ParticleManager;
 var canvas: any;
 var intervalReset: any;
+var lastTime: number = 0;
 
 function Canvas(props: any){
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [loading, setLoading] = useState(true);
 
   const onMoveHandle = function(e: any){
@@ -29,19 +31,24 @@ function Canvas(props: any){
   }
   
   useEffect(() => {
-      canvas = canvasRef.current
+      const canvas = canvasRef.current;
+      if (!canvas) return;
       const context = canvas.getContext('2d');
+      if (!context) return;
+
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       let animationFrameId: number;
 
       particleManager = new ParticleManager(canvas, context, () => {setLoading(false)});
 
-      const render = () => {
-        particleManager.draw(context);
-        animationFrameId = window.requestAnimationFrame(render)
+      const render = (time:number) => {
+        const deltaTime = (time - lastTime) / 1000;
+        lastTime = time;
+        particleManager.draw(context, deltaTime);
+        animationFrameId = window.requestAnimationFrame(render);
       }
-      render()
+      animationFrameId = window.requestAnimationFrame(render);
 
       window.addEventListener("resize", ()=>{
         intervalReset = setTimeout(() => {

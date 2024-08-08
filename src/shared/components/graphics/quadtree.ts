@@ -62,19 +62,19 @@ export default class Quadtree {
     subdivide(): void {
         const x = this.bounds.x;
         const y = this.bounds.y;
-        const w = this.bounds.width / 2;
-        const h = this.bounds.height / 2;
+        const width = this.bounds.width / 2;
+        const height = this.bounds.height / 2;
 
-        const topLeftBounds: IRectangle = { x, y, width: w, height: h };
+        const topLeftBounds: IRectangle = { x, y, width, height };
         this.topLeft = new Quadtree(topLeftBounds, this.capacity);
 
-        const topRightBounds = { x: x + w, y, width: w, height: h };
+        const topRightBounds: IRectangle = { x: x + width, y, width, height };
         this.topRight = new Quadtree(topRightBounds, this.capacity);
 
-        const bottomLeftBounds = { x, y: y + h, width: w, height: h };
+        const bottomLeftBounds: IRectangle = { x, y: y + height, width, height };
         this.bottomLeft = new Quadtree(bottomLeftBounds, this.capacity);
 
-        const bottomRightBounds = { x: x + w, y: y + h, width: w, height: h };
+        const bottomRightBounds: IRectangle = { x: x + width, y: y + height, width, height };
         this.bottomRight = new Quadtree(bottomRightBounds, this.capacity);
 
         this.divided = true;

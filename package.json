@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.51.16",
     "axios": "^1.7.2",
+    "lodash-es": "^4.17.21",
     "next": "14.2.5",
     "next-intl": "^3.17.2",
     "react": "^18",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

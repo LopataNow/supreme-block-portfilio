@@ -19,7 +19,7 @@ export function createDefaultParticleSettings(settrings?: Partial<IParticleSetti
   return {
     radius: 2,
     moveRadius: 6,
-    moveSpeed: 0.05,
+    moveSpeed: 3,
     ...settrings,
   };
 }
@@ -34,17 +34,17 @@ export function drawParticle(context: CanvasRenderingContext2D, particle: IParti
   );
 }
 
-export function moveParticleAwayFromPoint(particle: IParticle, dx: number, dy: number, distance: number) {
-    particle.offset.x -= (dx * 130) / (distance ** 2);
-    particle.offset.y -= (dy * 130) / (distance ** 2);
+export function moveParticleAwayFromPoint(particle: IParticle, dx: number, dy: number, distance: number, deltaTime: number) {
+    particle.offset.x -= (dx * 130 * 25 * deltaTime) / (distance ** 2);
+    particle.offset.y -= (dy * 130 * 25 * deltaTime) / (distance ** 2);
 }
 
-export function moveParticleToPoint(particle: IParticle, moveSpeed: number) {
-    particle.offset.x -= particle.offset.x * 0.2;
-    particle.offset.y -= particle.offset.y * 0.2;
+export function moveParticleToPoint(particle: IParticle, moveSpeed: number, deltaTime: number) {
+    particle.offset.x -= particle.offset.x * 10 * deltaTime;
+    particle.offset.y -= particle.offset.y * 10 * deltaTime;
 
-    particle.move.x += moveSpeed;
-    particle.move.y += moveSpeed;
+    particle.move.x += moveSpeed * deltaTime; 
+    particle.move.y += moveSpeed * deltaTime;
 }
 
 export function createParticle(positionX: number, positionY: number, lightness: number): IParticle {

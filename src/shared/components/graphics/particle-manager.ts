@@ -63,7 +63,7 @@ export default class ParticleManager {
     });
   }
 
-  update() {
+  update(deltaTime: number) {
     const particleInMouseRectangle = this.particledTree.query({
       x: this.mousePosition.x - 104,
       y: this.mousePosition.y - 104,
@@ -82,21 +82,21 @@ export default class ParticleManager {
         particleInMouse.isInMOuseRange = true;
         if(distSq < 100 ** 2){
           const dist = Math.sqrt(distSq);
-          moveParticleAwayFromPoint(particleInMouse, dx, dy, dist);
+          moveParticleAwayFromPoint(particleInMouse, dx, dy, dist, deltaTime);
         }
       }
     }
 
     for (const particle of this.particles) {
       if (!particle.isInMOuseRange) {
-        moveParticleToPoint(particle, this.particleSettings.moveSpeed);
+        moveParticleToPoint(particle, this.particleSettings.moveSpeed, deltaTime);
       }
       particle.isInMOuseRange = false;
     }
   }
 
-  draw(context: CanvasRenderingContext2D) {
-    this.update();
+  draw(context: CanvasRenderingContext2D, deltaTime: number) {
+    this.update(deltaTime);
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     for (const particle of this.particles) {
       drawParticle(context, particle, this.particleSettings);

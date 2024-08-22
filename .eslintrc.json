@@ -1,3 +1,18 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "rules": {
+    "next/no-css-tags": "off",
+    "jsx-quotes": [2, "prefer-single"],
+    "semi": "error",
+    "indent": ["error", "tab"],
+    "linebreak-style": ["error", "unix"],
+    "no-console": "warn",
+    "no-irregular-whitespace": "warn"
+  }
+  
 }

@@ -12,7 +12,7 @@
     "indent": ["error", "tab"],
     "linebreak-style": ["error", "unix"],
     "no-console": "warn",
-    "no-irregular-whitespace": "warn"
+    "no-irregular-whitespace": "warn",
+    "max-len": ["error", { "code": 120, "ignoreUrls": true, "ignoreStrings": true }]
   }
-  
 }

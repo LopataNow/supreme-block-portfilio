@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 class PerlinNoise {
 	public static noise(x: number, y: number, z: number): number {
 		const p: number[] = new Array(512);

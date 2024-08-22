@@ -34,7 +34,12 @@ export function drawParticle(context: CanvasRenderingContext2D, particle: IParti
 	);
 }
 
-export function moveParticleAwayFromPoint(particle: IParticle, dx: number, dy: number, distance: number, deltaTime: number) {
+export function moveParticleAwayFromPoint(
+	particle: IParticle,
+	dx: number, dy: number,
+	distance: number,
+	deltaTime: number
+) {
 	particle.offset.x -= (dx * 130 * 25 * deltaTime) / (distance ** 2);
 	particle.offset.y -= (dy * 130 * 25 * deltaTime) / (distance ** 2);
 }
@@ -83,6 +88,7 @@ export function generateParticles({
 		for (let y = startY-4; y < height - padding; y += spaces) {
 			const noise = PerlinNoise.noise((randomX + x / width) * 20, (randomY + y / height) * 20, 0.8);
 			if (noise < 0.36) {
+				// eslint-disable-next-line max-len
 				const lightness = 22 + PerlinNoise.noise((randomX + x / width) * 5, (randomY + y / height) * 5, 0.8) * 75;
 				particles.push([x, y, lightness]);
 			}

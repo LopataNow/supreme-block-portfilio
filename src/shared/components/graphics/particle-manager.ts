@@ -101,11 +101,12 @@ export default class ParticleManager {
 	}
 
 	draw(context: CanvasRenderingContext2D, deltaTime: number) {
-		this.update(deltaTime);
 		context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 		for (const particle of this.particles) {
 			drawParticle(context, particle, this.particleSettings);
 		}
+		
+		this.update(deltaTime);
 
 		//this.drawTree(context);
 	}

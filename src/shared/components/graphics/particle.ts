@@ -2,17 +2,17 @@ import PerlinNoise from "@/common/perlin-noise";
 import { IPoint, IVector } from "./point";
 
 export interface IParticleSettings {
-  radius: number;
-  moveRadius: number;
-  moveSpeed: number;
+	radius: number;
+	moveRadius: number;
+	moveSpeed: number;
 }
 
 export interface IParticle{
-  colorString: string;
-  offset: IVector;
-  move: IVector;
-  position: IPoint;
-  isInMOuseRange?: boolean;
+	colorString: string;
+	offset: IVector;
+	move: IVector;
+	position: IPoint;
+	isInMOuseRange?: boolean;
 }
 
 export function createDefaultParticleSettings(settrings?: Partial<IParticleSettings>): IParticleSettings {

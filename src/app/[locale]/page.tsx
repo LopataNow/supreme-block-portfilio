@@ -19,9 +19,7 @@ export default function HomePage() {
 	const t = useTranslations('HomePage');
 	return (
 		<>
-			<Suspense fallback={<div>Loading...</div>}>
-				<Data />
-			</Suspense>
+			<Particles />
 		</>
 	);
 }

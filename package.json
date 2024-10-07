@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@storyblok/react": "^3.0.11",
@@ -22,7 +24,16 @@
     "styled-components": "^6.1.12"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.9.0",
     "@next/eslint-plugin-next": "^14.2.6",
+    "@storybook/addon-essentials": "^8.3.4",
+    "@storybook/addon-interactions": "^8.3.4",
+    "@storybook/addon-links": "^8.3.4",
+    "@storybook/addon-onboarding": "^8.3.4",
+    "@storybook/blocks": "^8.3.4",
+    "@storybook/nextjs": "^8.3.4",
+    "@storybook/react": "^8.3.4",
+    "@storybook/test": "^8.3.4",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.12",
@@ -34,9 +45,11 @@
     "eslint-config-next": "14.2.5",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-storybook": "^0.9.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "sass": "^1.77.8",
+    "storybook": "^8.3.4",
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"

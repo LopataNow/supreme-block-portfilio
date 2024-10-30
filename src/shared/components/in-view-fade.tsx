@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, ReactNode, useCallback, useMemo, useState } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 import styles from './in-view-fade.module.scss';
 import React from "react";
 

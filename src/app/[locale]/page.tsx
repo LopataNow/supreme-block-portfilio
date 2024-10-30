@@ -1,16 +1,15 @@
-import React, { Suspense } from 'react';
-import Particles from '@/shared/components/graphics/particles';
 import { useTranslations } from 'next-intl';
 import { getStoryblokApi, ISbStoriesParams, StoryblokComponent } from '@storyblok/react';
-
 import styles from './home.module.scss';
-import InViewFade from '@/shared/components/in-view-fade';
+import { HomeHero } from './home-hero';
+import HomeSkills from './home-skills';
 
 let slug = "home";
 
 let sbParams: ISbStoriesParams = {
 	version: "draft", // or 'published'
 };
+
 const storyblokApi = getStoryblokApi();
 
 async function Data() {
@@ -18,19 +17,13 @@ async function Data() {
 	return <StoryblokComponent blok={data.story.content} />;
 }
 
-const data = Data();
-
 export default function HomePage() {
 	const t = useTranslations('HomePage');
 	return (
 		<>
-			<div className={styles['home-hero']}>
-				<Particles />
-			</div>
+			<HomeHero />
 			<div className={styles['home-content']}>
-				<InViewFade>
-					content
-				</InViewFade>
+				<HomeSkills />
 			</div>
 		</>
 	);

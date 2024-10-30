@@ -1,30 +1,18 @@
 
 .animacion-fade-in{
-	padding: 100px;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: animacion-ease-in 2.5s;
 }
 
 .animacion-fade-out{
-	padding: 200px;
-    animation: fadeOut 0.5s ease-in-out;
+    opacity: 0;
 }
 
-@keyframes animacion-ease-in-out{
+@keyframes animacion-ease-in{
     0%{
         opacity: 0;
         
     }
     100%{
         opacity: 1;
-    }
-}
-
-@keyframes animacion-ease-in-out{
-    0%{
-        opacity: 1;
-        
-    }
-    100%{
-        opacity: 0;
     }
 }

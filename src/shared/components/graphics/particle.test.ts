@@ -7,7 +7,7 @@ describe('create default particle settings', () => {
 		expect(particleSettings).toEqual({
 			radius: 2,
 			moveRadius: 6,
-			moveSpeed: 0.05,
+			moveSpeed: 3,
 		});
 	});
 
@@ -15,12 +15,12 @@ describe('create default particle settings', () => {
 		let particleSettings = createDefaultParticleSettings({
 			radius: 3,
 			moveRadius: 7,
-			moveSpeed: 0.06,
+			moveSpeed: 5,
 		});
 		expect(particleSettings).toEqual({
 			radius: 3,
 			moveRadius: 7,
-			moveSpeed: 0.06,
+			moveSpeed: 5,
 		});
 
 		particleSettings = createDefaultParticleSettings({
@@ -30,7 +30,7 @@ describe('create default particle settings', () => {
 		expect(particleSettings).toEqual({
 			radius: 4,
 			moveRadius: 6,
-			moveSpeed: 0.05,
+			moveSpeed: 3,
 		});
 	});
 });

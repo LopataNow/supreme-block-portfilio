@@ -1,0 +1,22 @@
+.input-teaxarea{
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    height: 150px;
+    margin: 10px 5px;;
+    border: 1px solid #bdbdbd;
+    border-radius: 2px;
+    padding: 15px 8px;
+    font-family: 'Poppins', sans-serif;
+    &:hover{
+        box-shadow: 0 0 2px #719ECE;
+        outline: none;
+    }
+    &:focus{
+        border-color: #6200EE;
+        outline: none;
+    }
+
+    &:disabled {
+        cursor: no-drop;
+    }
+}

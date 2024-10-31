@@ -7,6 +7,13 @@ import Grid from '@/storybook-compoment/Grid';
 import Teaser from '@/storybook-compoment/Teaser';
 import Page from '@/storybook-compoment/Page';
 import '../styles/index.scss';
+import { Poppins } from 'next/font/google';
+
+const poppins = Poppins({
+	weight: ['400', '800'],
+	subsets: ['latin'],
+	display: 'swap',
+});
 
 const components = {
 	feature: Feature,
@@ -36,7 +43,7 @@ export default async function LocaleLayout({
 	const messages = await getMessages();
  
 	return (
-		<html lang={locale}>
+		<html lang={locale} className={poppins.className}>
 			<body>
 				<NextIntlClientProvider messages={messages}>
 					{children}

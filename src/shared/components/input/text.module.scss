@@ -1,0 +1,20 @@
+.input-text{
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    border: 1px solid #bdbdbd;
+    border-radius: 2px;
+    padding: 12px 8px;
+    margin: 15px 5px;
+    &:hover{
+        box-shadow: 0 0 2px #719ECE;
+        outline: none;
+    }
+    &:focus{
+        border-color: #6200EE;
+        outline: none;
+    }
+
+    &:disabled {
+        cursor: no-drop;
+    }
+}

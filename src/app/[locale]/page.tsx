@@ -3,6 +3,7 @@ import { getStoryblokApi, ISbStoriesParams, StoryblokComponent } from '@storyblo
 import styles from './home.module.scss';
 import { HomeHero } from './home-hero';
 import HomeSkills from './home-skills';
+import HomeContact from './home-contact';
 
 let slug = "home";
 
@@ -24,6 +25,7 @@ export default function HomePage() {
 			<HomeHero />
 			<div className={styles['home-content']}>
 				<HomeSkills />
+				<HomeContact />
 			</div>
 		</>
 	);

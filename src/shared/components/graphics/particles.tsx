@@ -20,16 +20,12 @@ var canvas: any;
 var intervalReset: any;
 var lastTime: number = 0;
 
-function Canvas(props: any){
+interface CanvasProps extends ParticleProps {}
+
+function Canvas({children, ...rest}: CanvasProps){
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const [loading, setLoading] = useState(true);
 
-	const onMoveHandle = function(e: any){
-		if(particleManager){
-			particleManager.setMousePosition(getMousePos(canvas, e));
-		}
-	};
-  
 	useEffect(() => {
 		const canvas = canvasRef.current;
 		if (!canvas) return;
@@ -77,18 +73,29 @@ function Canvas(props: any){
 			{loading && <div>Loading...</div>}
 			<div className='particles'>
 				<canvas
-					ref={canvasRef} {...props} 
+					ref={canvasRef} {...rest} 
 					style={{width: '100%', height: '97vh'}}
-					onMouseMove={onMoveHandle}/>
+				/>
+				{!loading && children}
 			</div>
 		</>
 	);
 }
 
-function Particles (props: any) {
+interface ParticleProps {
+	children: any;
+}
+
+function Particles (props: ParticleProps) {
+	const onMoveHandle = function(e: any){
+		if(particleManager){
+			particleManager.setMousePosition(getMousePos(canvas, e));
+		}
+	};
+
 	return (
-		<div >
-			<Canvas {...props}/>
+		<div onMouseMove={onMoveHandle}>
+			<Canvas {...props} />
 		</div>
 	);
 }

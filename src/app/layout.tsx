@@ -6,6 +6,7 @@ import Feature from '@/storybook-compoment/Feature';
 import Grid from '@/storybook-compoment/Grid';
 import Teaser from '@/storybook-compoment/Teaser';
 import Page from '@/storybook-compoment/Page';
+import '../styles/index.scss';
 
 const components = {
 	feature: Feature,

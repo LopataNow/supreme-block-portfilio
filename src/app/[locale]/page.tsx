@@ -1,13 +1,15 @@
-import React, { Suspense } from 'react';
-import Particles from '@/shared/components/graphics/particles';
 import { useTranslations } from 'next-intl';
 import { getStoryblokApi, ISbStoriesParams, StoryblokComponent } from '@storyblok/react';
+import styles from './home.module.scss';
+import { HomeHero } from './home-hero';
+import HomeSkills from './home-skills';
 
 let slug = "home";
 
 let sbParams: ISbStoriesParams = {
 	version: "draft", // or 'published'
 };
+
 const storyblokApi = getStoryblokApi();
 
 async function Data() {
@@ -19,9 +21,10 @@ export default function HomePage() {
 	const t = useTranslations('HomePage');
 	return (
 		<>
-			<Suspense fallback={<div>Loading...</div>}>
-				<Data />
-			</Suspense>
+			<HomeHero />
+			<div className={styles['home-content']}>
+				<HomeSkills />
+			</div>
 		</>
 	);
 }

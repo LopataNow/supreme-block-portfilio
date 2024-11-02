@@ -4,6 +4,7 @@ import styles from './home.module.scss';
 import { HomeHero } from './home-hero';
 import HomeSkills from './home-skills';
 import HomeContact from './home-contact';
+import HomeServices from './home-services';
 
 let slug = "home";
 
@@ -24,6 +25,7 @@ export default function HomePage() {
 		<>
 			<HomeHero />
 			<div className={styles['home-content']}>
+				<HomeServices/>
 				<HomeSkills />
 				<HomeContact />
 			</div>

@@ -15,7 +15,7 @@ export default function HomeServices() {
 					<div className={styles['home-services-card']}>Monitoring and optimalozation</div>
 					<div className={styles['home-services-card']}>Game dev</div>
 					<div className={styles['home-services-card']}>AI tools implementation</div>
-					<div className={styles['home-services-card']}>Custom development</div>
+					<div className={styles['home-services-card']}>Custom App development</div>
 				</div>
 			</div>
 		</>

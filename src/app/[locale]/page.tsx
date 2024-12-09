@@ -6,7 +6,7 @@ import HomeSkills from './home-skills';
 import HomeContact from './home-contact';
 import HomeServices from './home-services';
 
-let slug = "home";
+let slug = "en";
 
 let sbParams: ISbStoriesParams = {
 	version: "draft", // or 'published'
@@ -15,6 +15,7 @@ let sbParams: ISbStoriesParams = {
 const storyblokApi = getStoryblokApi();
 
 async function Data() {
+
 	let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
 	return <StoryblokComponent blok={data.story.content} />;
 }
@@ -25,9 +26,9 @@ export default function HomePage() {
 		<>
 			<HomeHero />
 			<div className={styles['home-content']}>
+				<Data />
 				<HomeServices/>
 				<HomeSkills />
-				<HomeContact />
 			</div>
 		</>
 	);

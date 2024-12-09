@@ -10,7 +10,7 @@ export function HomeHero(){
 					<div>
 						<InViewFade>
 							<h1>Peter Kopáč</h1>
-							<h2>I&apos;m a professional <br />Software Developer</h2>
+							<h2>I&apos;m a Software Developer</h2>
 							<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</h3>
 						</InViewFade>
 					</div>

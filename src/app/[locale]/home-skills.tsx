@@ -10,22 +10,22 @@ export default function HomeSkills() {
 			<div className={styles['home-skills']}>
 				<InViewFade><h2>Skills</h2></InViewFade>
 
-				<InViewFade>
+				<InViewFade className={styles['home-skills-section']}>
 					<h3>Programing Language:</h3>
 					<p>C#, JavaScript, Typescript</p>
 				</InViewFade>
 
-				<InViewFade>
+				<InViewFade className={styles['home-skills-section']}>
 					<h3>Front-End:</h3>
 					<p>React, Angular, Regux, Rxjs, HTML, CSS/SCSS, Styled compoment</p>
 				</InViewFade>
 
-				<InViewFade>
+				<InViewFade className={styles['home-skills-section']}>
 					<h3>Back-End:</h3>
 					<p>Nodejs, ASP:NET Core, Entity Framework, PostgreSQL, MogoDB, Firebase</p>
 				</InViewFade>
 
-				<InViewFade>
+				<InViewFade className={styles['home-skills-section']}>
 					<h3>Game development:</h3>
 					<p>Unity 3D, Blender, Shaders, Game Design, GameAI</p>
 				</InViewFade>

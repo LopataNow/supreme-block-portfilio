@@ -3,7 +3,8 @@ import styles from './home.module.scss';
 import InViewFade from '@/shared/components/in-view-fade';
 import {Text, TextArea} from '@/shared/components/input';
 
-function ContackFrom(){
+// eslint-disable-next-line no-unused-vars
+function ContackForm(){
 	return(
 		<div className={styles['home-contact-form']}>
 			<form>
@@ -20,8 +21,10 @@ export default function HomeContact() {
 	return (
 		<>
 			<div className={styles['home-contact']}>
-				<InViewFade><h2>Contact</h2></InViewFade>
-				<ContackFrom />
+				<InViewFade>
+					<h2>Contact</h2>
+					<p className={styles['home-contact-email']}>peter.kopac3@gmail.com</p>
+				</InViewFade>
 			</div>
 		</>
 	);

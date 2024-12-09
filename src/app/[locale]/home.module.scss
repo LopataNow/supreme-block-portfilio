@@ -1,11 +1,12 @@
 .home-content{
 	margin-top: 100vh;
-	background: white;
-	width: 100%;
+    padding: 20px clamp(8px,8%,180px);
+    
+    background: white;
+    box-shadow: 0 -4px 12px rgba(0,0,0,.12),0 1px 8px rgba(0,0,0,.16);
 }
 
 .home-hero{
-	width: 100%;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -43,6 +44,16 @@
     }
 }
 .home-contact{
+    margin-top: 80px;
+    margin-bottom: 80px;
+
+    .home-contact-email{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 400;
+        font-size: 2rem;
+    }
     .home-contact-form{
         display: flex;
         flex-direction: column;
@@ -51,7 +62,25 @@
     }
 }
 
+.home-skills{
+    margin-top: 80px;
+
+    .home-skills-section{
+        margin: 0px 50px 0 50px;
+
+        h3{
+            margin: 0;
+        }
+
+        p{
+            margin: 0;
+        }
+    }
+}
+
 .home-services{
+    margin-top: 80px;
+
     .home-services-cards{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

@@ -7,8 +7,8 @@ export default function HomeServices() {
 	const t = useTranslations('HomePage');
 	return (
 		<>
-			<div className={styles['home-services']}>
-				<InViewFade><h2>Services</h2></InViewFade>
+			<InViewFade className={styles['home-services']}>
+				<h2>Services</h2>
 				<div className={styles['home-services-cards']}>
 					<div className={styles['home-services-card']}>Heandless CMS or Eshop</div>
 					<div className={styles['home-services-card']}>Frontend or Fullstack dev</div>
@@ -17,7 +17,7 @@ export default function HomeServices() {
 					<div className={styles['home-services-card']}>AI tools implementation</div>
 					<div className={styles['home-services-card']}>Custom App development</div>
 				</div>
-			</div>
+			</InViewFade>
 		</>
 	);
 }

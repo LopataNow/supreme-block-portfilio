@@ -66,8 +66,10 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const { hero, layout } = page
 
+  const hasFixedHero = Array.isArray(layout) && layout.some((b) => b.blockType === 'fixedHero')
+
   return (
-    <article className="pt-16 pb-24">
+    <article className={hasFixedHero ? 'pb-24' : 'pt-16 pb-24'}>
       <PageClient />
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />

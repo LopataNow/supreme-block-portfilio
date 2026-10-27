@@ -201,7 +201,59 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | {
+        name?: string | null;
+        title?: string | null;
+        subtitle?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'fixedHero';
+      }
+    | {
+        text?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'homeDescription';
+      }
+    | {
+        heading?: string | null;
+        services?:
+          | {
+              title: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'homeServices';
+      }
+    | {
+        heading?: string | null;
+        sections?:
+          | {
+              title: string;
+              items: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'homeSkills';
+      }
+    | {
+        heading?: string | null;
+        email?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'homeContact';
+      }
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -1076,6 +1128,57 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        fixedHero?:
+          | T
+          | {
+              name?: T;
+              title?: T;
+              subtitle?: T;
+              id?: T;
+              blockName?: T;
+            };
+        homeDescription?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+              blockName?: T;
+            };
+        homeServices?:
+          | T
+          | {
+              heading?: T;
+              services?:
+                | T
+                | {
+                    title?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        homeSkills?:
+          | T
+          | {
+              heading?: T;
+              sections?:
+                | T
+                | {
+                    title?: T;
+                    items?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        homeContact?:
+          | T
+          | {
+              heading?: T;
+              email?: T;
+              id?: T;
+              blockName?: T;
+            };
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;

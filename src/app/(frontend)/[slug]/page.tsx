@@ -5,8 +5,6 @@ import configPromise from '@payload-config'
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import { homeStatic } from '@/endpoints/seed/home-static'
-
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
@@ -37,15 +35,31 @@ export async function generateStaticParams() {
   return params
 }
 
+import { getHomeStatic, type SupportedLocale } from '@/endpoints/seed/home-static'
+import { cookies } from 'next/headers'
+
 type Args = {
   params: Promise<{
     slug?: string
   }>
+  searchParams?: Promise<{
+    locale?: string
+  }>
 }
 
-export default async function Page({ params: paramsPromise }: Args) {
+export default async function Page({
+  params: paramsPromise,
+  searchParams: searchParamsPromise,
+}: Args) {
   const { isEnabled: draft } = await draftMode()
   const { slug = 'home' } = await paramsPromise
+  const searchParams = searchParamsPromise ? await searchParamsPromise : {}
+  const cookieStore = await cookies()
+  const cookieLocale = cookieStore.get('payload_locale')?.value
+
+  const activeLocale: SupportedLocale =
+    searchParams?.locale === 'en' || (!searchParams?.locale && cookieLocale === 'en') ? 'en' : 'sk'
+
   // Decode to support slugs with special characters
   const decodedSlug = decodeURIComponent(slug)
   const url = '/' + decodedSlug
@@ -53,11 +67,12 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   page = await queryPageBySlug({
     slug: decodedSlug,
+    locale: activeLocale,
   })
 
-  // Remove this code once your website is seeded
+  // Fallback to static data matching the active locale
   if (!page && slug === 'home') {
-    page = homeStatic
+    page = getHomeStatic(activeLocale)
   }
 
   if (!page) {
@@ -93,23 +108,26 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   return generateMeta({ doc: page })
 }
 
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
+const queryPageBySlug = cache(
+  async ({ slug, locale = 'sk' }: { slug: string; locale?: SupportedLocale }) => {
+    const { isEnabled: draft } = await draftMode()
 
-  const payload = await getPayload({ config: configPromise })
+    const payload = await getPayload({ config: configPromise })
 
-  const result = await payload.find({
-    collection: 'pages',
-    draft,
-    limit: 1,
-    pagination: false,
-    overrideAccess: draft,
-    where: {
-      slug: {
-        equals: slug,
+    const result = await payload.find({
+      collection: 'pages',
+      draft,
+      limit: 1,
+      locale,
+      pagination: false,
+      overrideAccess: draft,
+      where: {
+        slug: {
+          equals: slug,
+        },
       },
-    },
-  })
+    })
 
-  return result.docs?.[0] || null
-})
+    return result.docs?.[0] || null
+  },
+)

@@ -17,12 +17,34 @@ export async function Footer() {
           <Logo />
         </Link>
 
-        <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-          <nav className="flex flex-col md:flex-row gap-4">
-            {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
-            })}
-          </nav>
+        <div className="flex flex-col items-center md:items-end gap-3 text-xs text-muted-foreground">
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.linkedin.com/in/peterkopac/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/LopataNow"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://app.pluralsight.com/profile/peter-kopac"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Pluralsight
+            </a>
+          </div>
+          <p>© {new Date().getFullYear()} Peter Kopáč. All rights reserved.</p>
         </div>
       </div>
     </footer>

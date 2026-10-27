@@ -1,0 +1,37 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Next.js build output & cache
+.next
+out
+build
+dist
+
+# Git & CI/CD
+.git
+.github
+
+# Environment files (secrets should be injected via docker run/compose or env)
+.env
+.env*.local
+*.env
+
+# AI & IDE directories
+.gemini
+.antigravity
+.claude
+.agents
+.vscode
+.idea
+
+# Test & coverage results
+coverage
+test-results
+playwright-report
+blob-report
+playwright/.cache
+
+# OS files
+.DS_Store
+Thumbs.db

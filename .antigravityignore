@@ -1,0 +1,23 @@
+# Ignore large build artifacts, caches, and node_modules
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Test artifacts
+coverage/
+test-results/
+playwright-report/
+blob-report/
+.cache/
+
+# Media uploads & local files
+public/media/
+
+# Git metadata
+.git/
+
+# IDE & agent run artifacts
+.gemini/
+.antigravity/

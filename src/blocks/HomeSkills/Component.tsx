@@ -30,7 +30,7 @@ export const HomeSkills: React.FC<HomeSkillsProps> = ({
   ],
 }) => {
   return (
-    <section className="my-20">
+    <section id="skills" className="my-20">
       <ScrollReveal direction="up" delay={0.1}>
         <h2 className="text-3xl font-extrabold text-foreground mb-8 text-center sm:text-left">
           {heading}

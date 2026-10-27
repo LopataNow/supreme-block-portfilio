@@ -27,6 +27,12 @@ const staticDataByLocale: Record<SupportedLocale, RequiredDataFromCollectionSlug
         text: 'Som Front-End vývojár so špecializáciou na React a skúsenosťami s Angularom, .NET, Node.js a Unity 3D. Vynikám v analytickom a kreatívnom myslení, algoritmoch, dátových štruktúrach a návrhových vzoroch. Rýchlo sa prispôsobujem novým technológiám s dôrazom na čistý a optimalizovaný kód.',
       },
       {
+        blockType: 'featuredProjects',
+        badge: 'Vybrané práce',
+        heading: 'Projekty & Portfólio',
+        subheading: 'Ukážka softvérového vývoja, interaktívnej grafiky a moderných fullstack aplikácií.',
+      },
+      {
         blockType: 'homeServices',
         heading: 'Služby',
         services: [
@@ -89,6 +95,12 @@ const staticDataByLocale: Record<SupportedLocale, RequiredDataFromCollectionSlug
       {
         blockType: 'homeDescription',
         text: "I'm a Front-End Developer specializing in React, with experience in Angular, .NET, Node.js, and Unity 3D. I excel in analytical and creative thinking, algorithms, data structures, and design patterns. I ensure quick adaptation to new technologies and a focus on clean, optimized code.",
+      },
+      {
+        blockType: 'featuredProjects',
+        badge: 'Selected Work',
+        heading: 'Featured Projects',
+        subheading: 'A selection of software development, interactive graphics, and fullstack applications.',
       },
       {
         blockType: 'homeServices',

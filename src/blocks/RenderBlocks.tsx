@@ -12,11 +12,13 @@ import { HomeDescription } from '@/blocks/HomeDescription/Component'
 import { HomeServices } from '@/blocks/HomeServices/Component'
 import { HomeSkills } from '@/blocks/HomeSkills/Component'
 import { HomeContact } from '@/blocks/HomeContact/Component'
+import { FeaturedProjects } from '@/blocks/FeaturedProjects/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
+  featuredProjects: FeaturedProjects,
   fixedHero: FixedHero,
   formBlock: FormBlock,
   homeContact: HomeContact,

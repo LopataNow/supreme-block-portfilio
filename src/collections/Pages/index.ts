@@ -12,6 +12,7 @@ import { HomeDescriptionBlock } from '@/blocks/HomeDescription/config'
 import { HomeServicesBlock } from '@/blocks/HomeServices/config'
 import { HomeSkillsBlock } from '@/blocks/HomeSkills/config'
 import { HomeContactBlock } from '@/blocks/HomeContact/config'
+import { FeaturedProjectsBlock } from '@/blocks/FeaturedProjects/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -80,6 +81,7 @@ export const Pages: CollectionConfig<'pages'> = {
               blocks: [
                 FixedHeroBlock,
                 HomeDescriptionBlock,
+                FeaturedProjectsBlock,
                 HomeServicesBlock,
                 HomeSkillsBlock,
                 HomeContactBlock,

@@ -10,6 +10,7 @@ import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { ContactMessages } from './collections/ContactMessages'
+import { Projects } from './collections/Projects'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -77,7 +78,7 @@ export default buildConfig({
     defaultLocale: 'sk',
     fallback: true,
   },
-  collections: [Pages, Posts, ContactMessages, Media, Categories, Users],
+  collections: [Pages, Posts, Projects, ContactMessages, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins,

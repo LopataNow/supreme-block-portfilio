@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    projects: Project;
     'contact-messages': ContactMessage;
     media: Media;
     categories: Category;
@@ -92,6 +93,7 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
@@ -217,6 +219,15 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'homeDescription';
+      }
+    | {
+        badge?: string | null;
+        heading?: string | null;
+        subheading?: string | null;
+        limit?: number | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featuredProjects';
       }
     | {
         heading?: string | null;
@@ -829,6 +840,75 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  title: string;
+  /**
+   * URL slug (e.g. premiere-composer or geometric-filter)
+   */
+  slug: string;
+  featured?: boolean | null;
+  period?: string | null;
+  /**
+   * e.g. Mister Horse, Swan / 4ka, or Personal project
+   */
+  client?: string | null;
+  /**
+   * e.g. Zden from Satori, or other team members
+   */
+  collaborators?: string | null;
+  /**
+   * A 2-3 sentence overview displayed on homepage and project cards
+   */
+  summary: string;
+  /**
+   * Optional thumbnail image; if empty, a modern technical card style is displayed
+   */
+  coverImage?: (number | null) | Media;
+  techStack?:
+    | {
+        name: string;
+        id?: string | null;
+      }[]
+    | null;
+  links?:
+    | {
+        label: string;
+        url: string;
+        type?: ('live' | 'github' | 'article' | 'docs' | 'other') | null;
+        id?: string | null;
+      }[]
+    | null;
+  downloadFile?: (number | null) | Media;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  images?:
+    | {
+        image: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-messages".
  */
 export interface ContactMessage {
@@ -1039,6 +1119,10 @@ export interface PayloadLockedDocument {
         value: number | Post;
       } | null)
     | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
         relationTo: 'contact-messages';
         value: number | ContactMessage;
       } | null)
@@ -1160,6 +1244,16 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featuredProjects?:
+          | T
+          | {
+              badge?: T;
+              heading?: T;
+              subheading?: T;
+              limit?: T;
               id?: T;
               blockName?: T;
             };
@@ -1332,6 +1426,45 @@ export interface PostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  featured?: T;
+  period?: T;
+  client?: T;
+  collaborators?: T;
+  summary?: T;
+  coverImage?: T;
+  techStack?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        type?: T;
+        id?: T;
+      };
+  downloadFile?: T;
+  description?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
